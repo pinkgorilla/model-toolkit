@@ -35,5 +35,5 @@ node_modules
 # Visual Studio Code
 .vscode
 
-#tgz
+# tgz
 *.tgz
