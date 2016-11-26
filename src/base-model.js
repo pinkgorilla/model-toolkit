@@ -1,17 +1,18 @@
-'use strict'
+"use strict";
+
 module.exports = class BaseModel {
     constructor(type, version) {
-        this._stamp = '';
+        this._stamp = "";
         this._type = type;
         this._version = version;
         this._active = true;
         this._deleted = false;
-        this._createdBy = '';
-        this._createdDate = '';
-        this._createAgent = '';
-        this._updatedBy = '';
-        this._updatedDate = '';
-        this._updateAgent = '';
+        this._createdBy = "";
+        this._createdDate = "";
+        this._createAgent = "";
+        this._updatedBy = "";
+        this._updatedDate = "";
+        this._updateAgent = "";
     }
 
     stamp(actor, agent) {
@@ -36,12 +37,12 @@ module.exports = class BaseModel {
 
     copy(source) {
         if (source) {
-            this._id = '';
+            this._id = "";
             for (var prop in this)
                 if (source[prop] != undefined)
                     this[prop] = source[prop];
                     
-            if (!this._id || this._id == '')
+            if (!this._id || this._id === "")
                 delete (this._id);
         }
     }
