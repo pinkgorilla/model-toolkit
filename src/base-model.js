@@ -19,11 +19,13 @@ module.exports = class BaseModel {
         var now = new Date();
 
         if (!this._createdBy || this._createdBy.length < 1) {
-        } this._createdBy = actor;
+            this._createdBy = actor;
+        }
 
         if (!this._createdDate) {
             this._createdDate = now;
         }
+        
         if (!this._createAgent || this._createAgent.length < 1) {
             this._createAgent = agent;
         }
