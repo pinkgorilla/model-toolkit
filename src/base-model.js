@@ -8,10 +8,10 @@ module.exports = class BaseModel {
         this._active = true;
         this._deleted = false;
         this._createdBy = "";
-        this._createdDate = "";
+        this._createdDate = new Date(1900,1,1);
         this._createAgent = "";
         this._updatedBy = "";
-        this._updatedDate = "";
+        this._updatedDate = new Date(1900,1,1);
         this._updateAgent = "";
     }
 
@@ -31,7 +31,7 @@ module.exports = class BaseModel {
     }
 
     copy(source) {
-        this._id = "";
+        this._id = undefined;
         for (var prop in this) {
             this[prop] = source ? source[prop] || this[prop] : this[prop];
         }
