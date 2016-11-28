@@ -31,6 +31,7 @@ module.exports = class BaseModel {
     }
 
     copy(source) {
+        this._id = "";
         for (var prop in this) {
             this[prop] = source ? source[prop] || this[prop] : this[prop];
         }
