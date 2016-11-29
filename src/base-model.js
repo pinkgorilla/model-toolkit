@@ -8,19 +8,19 @@ module.exports = class BaseModel {
         this._active = true;
         this._deleted = false;
         this._createdBy = "";
-        this._createdDate = new Date(1900,1,1);
+        this._createdDate = new Date(1900, 1, 1);
         this._createAgent = "";
         this._updatedBy = "";
-        this._updatedDate = new Date(1900,1,1);
+        this._updatedDate = new Date(1900, 1, 1);
         this._updateAgent = "";
     }
 
     stamp(actor, agent) {
         var now = new Date();
 
-        this._createdBy = !this._createdBy || this._createdBy.length < 1 ? this._createdBy : actor;
+        this._createdBy = actor || this._createdBy;
         this._createdDate = !this._createdDate ? now : this._createdDate;
-        this._createAgent = !this._createAgent || this._createAgent.length < 1 ? this._createAgent : agent;
+        this._createAgent = agent || this._createAgent;
 
         var ticks = ((now.getTime() * 10000) + 621355968000000000);
 
@@ -31,11 +31,17 @@ module.exports = class BaseModel {
     }
 
     copy(source) {
-        this._id = undefined;
+        this._id = null;
+        var _source = source || {};
         for (var prop in this) {
-            this[prop] = source ? source[prop] || this[prop] : this[prop];
+            if (Object.hasOwnProperty.call(this, prop)) {
+                this[prop] = _source[prop] || this[prop];
+            }
         }
+        this.cleanUp();
+    }
 
+    cleanUp() {
         if (!this._id || this._id === "") {
             delete (this._id);
         }

@@ -27,4 +27,4 @@ module.exports = function (data) {
 
     data.should.have.property("_updateAgent");     
     data._updateAgent.should.instanceOf(String);
-}
+};
