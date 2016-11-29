@@ -4,7 +4,7 @@ require("should");
 var TestModel = require("./test-model");
 var validate = require("../src/base-model-validator");
 
-it("#01. should success when create new Model", function () {
+it("#01. should success when create new Model", function() {
     var model = new TestModel();
     validate(model);
 
@@ -15,8 +15,11 @@ it("#01. should success when create new Model", function () {
     model.copy.should.be.type("function");
 });
 
-it("#02. should only have property from defined model except for _id", function () {
-    var model = new TestModel({ _id: {}, forbidden: true });
+it("#02. should only have property from defined model except for _id", function() {
+    var model = new TestModel({
+        _id: {},
+        forbidden: true
+    });
     validate(model);
 
     model.should.not.have.property("forbidden");
@@ -24,8 +27,14 @@ it("#02. should only have property from defined model except for _id", function 
     model._id.should.be.instanceof(Object);
 });
 
-it("#03. model values should equal source values", function () {
-    var source = { number: 10, string: "some string", date: new Date(), object: {}, array: [1, 2, 3] };
+it("#03. model values should equal source values", function() {
+    var source = {
+        number: 10,
+        string: "some string",
+        date: new Date(),
+        object: {},
+        array: [1, 2, 3]
+    };
     var model = new TestModel(source);
     validate(model);
 
@@ -38,15 +47,24 @@ it("#03. model values should equal source values", function () {
     }
 });
 
-// it("#04. model createdDate should not changed when stamping", function () {
-//     var source = { number: 10, string: "some string", date: new Date(), object: {}, array: [1, 2, 3], _createdBy: "JOHN", _createdDate: new Date(1970, 1, 1), _createAgent: "UNIT-TEST" };
-//     var model = new TestModel(source);
-//     model.stamp("ACTOR", "AGENT");
-//     validate(model);
-//     source._createdBy.should.equal(model._createdBy);
-//     source._createdDate.valueOf().should.equal(model._createdDate.valueOf());
-//     source._createAgent.should.equal(model._createAgent);
+it("#04. model createdDate should not changed when stamping", function() {
+    var source = {
+        number: 10,
+        string: "some string",
+        date: new Date(),
+        object: {},
+        array: [1, 2, 3],
+        _createdBy: "JOHN",
+        _createdDate: new Date(1970, 1, 1),
+        _createAgent: "UNIT-TEST"
+    };
+    var model = new TestModel(source);
+    model.stamp("ACTOR", "AGENT");
+    validate(model);
+    source._createdBy.should.equal(model._createdBy);
+    source._createdDate.valueOf().should.equal(model._createdDate.valueOf());
+    source._createAgent.should.equal(model._createAgent);
 
-//     source._updatedBy.should.equal("ACTOR");
-//     source._updateAgent.should.equal("AGENT"); 
-// });
+    model._updatedBy.should.equal("ACTOR");
+    model._updateAgent.should.equal("AGENT");
+});

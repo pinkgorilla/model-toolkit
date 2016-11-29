@@ -18,9 +18,9 @@ module.exports = class BaseModel {
     stamp(actor, agent) {
         var now = new Date();
 
-        this._createdBy = actor || this._createdBy;
+        this._createdBy = this._createdBy || actor;
         this._createdDate = !this._createdDate ? now : this._createdDate;
-        this._createAgent = agent || this._createAgent;
+        this._createAgent = this._createAgent || agent;
 
         var ticks = ((now.getTime() * 10000) + 621355968000000000);
 
@@ -33,17 +33,16 @@ module.exports = class BaseModel {
     copy(source) {
         this._id = null;
         var _source = source || {};
-        for (var prop in this) {
-            if (Object.hasOwnProperty.call(this, prop)) {
-                this[prop] = _source[prop] || this[prop];
-            }
+        var properties = Object.getOwnPropertyNames(this);
+        for (var prop of properties) {
+            this[prop] = _source[prop] || this[prop];
         }
         this.cleanUp();
     }
 
     cleanUp() {
         if (!this._id || this._id === "") {
-            delete (this._id);
+            delete(this._id);
         }
     }
 };
