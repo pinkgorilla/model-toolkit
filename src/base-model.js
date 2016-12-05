@@ -1,5 +1,6 @@
 "use strict";
 
+const dateFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
 module.exports = class BaseModel {
     constructor(type, version) {
         this._stamp = "";
@@ -35,7 +36,7 @@ module.exports = class BaseModel {
         var _source = source || {};
         var properties = Object.getOwnPropertyNames(this);
         for (var prop of properties) {
-            this[prop] = _source[prop] || this[prop];
+            this[prop] = this.reviver(prop, _source[prop] || this[prop]);
         }
         this.cleanUp();
     }
@@ -44,5 +45,13 @@ module.exports = class BaseModel {
         if (!this._id || this._id === "") {
             delete(this._id);
         }
+    }
+
+    reviver(key, value) {
+        if (typeof value === "string" && dateFormat.test(value)) {
+            return new Date(value);
+        }
+
+        return value;
     }
 };

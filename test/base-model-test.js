@@ -51,7 +51,7 @@ it("#04. model createdDate should not changed when stamping", function() {
     var source = {
         number: 10,
         string: "some string",
-        date: new Date(),
+        date: "2016-01-01T00:00:00Z",
         object: {},
         array: [1, 2, 3],
         _createdBy: "JOHN",
