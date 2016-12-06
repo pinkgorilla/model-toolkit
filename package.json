@@ -30,5 +30,8 @@
     "coveralls": "^2.11.15",
     "istanbul": "^0.4.5",
     "mocha-lcov-reporter": "^1.2.0"
+  },
+  "dependencies": {
+    "mongodb": "^2.2.12"
   }
 }
