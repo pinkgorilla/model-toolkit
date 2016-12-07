@@ -52,7 +52,9 @@ module.exports = class BaseModel {
             return new Date(value);
         }
         else if (typeof value === "string" && ObjectId.isValid(value)) {
-            return new ObjectId(value);
+            var objectId = new ObjectId(value);
+            if (objectId.toString() === value)
+                return objectId;
         }
 
         return value;
