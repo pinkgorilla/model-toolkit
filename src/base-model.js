@@ -20,7 +20,7 @@ module.exports = class BaseModel {
         var now = new Date();
 
         this._createdBy = this._createdBy || actor;
-        this._createdDate = !this._createdDate ? now : this._createdDate;
+        this._createdDate = now;
         this._createAgent = this._createAgent || agent;
 
         var ticks = ((now.getTime() * 10000) + 621355968000000000);
