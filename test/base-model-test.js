@@ -55,13 +55,14 @@ it("#04. model createdDate should not changed when stamping", function() {
         object: {},
         array: [1, 2, 3],
         _createdBy: "JOHN",
-        _createdDate: new Date(1970, 1, 1),
+        _createdDate: new Date(1900, 1, 1),
         _createAgent: "UNIT-TEST"
     };
     var model = new TestModel(source);
     model.stamp("ACTOR", "AGENT");
     validate(model);
     source._createdBy.should.equal(model._createdBy);
+
     source._createdDate.valueOf().should.equal(model._createdDate.valueOf());
     source._createAgent.should.equal(model._createAgent);
 
