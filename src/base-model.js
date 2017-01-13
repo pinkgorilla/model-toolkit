@@ -36,14 +36,20 @@ module.exports = class BaseModel {
         var _source = source || {};
         var properties = Object.getOwnPropertyNames(this);
         for (var prop of properties) {
-            this[prop] = this.reviver(prop, _source[prop] || this[prop]);
+            var _type = typeof this[prop];
+            if (_type && _type.toLowerCase() === "boolean") {
+                var _s = (_source[prop] || "false").toString().toLowerCase() !== "false";
+                this[prop] = _s;
+            }
+            else
+                this[prop] = this.reviver(prop, _source[prop] || this[prop]);
         }
         this.cleanUp();
     }
 
     cleanUp() {
         if (!this._id || this._id === "") {
-            delete(this._id);
+            delete (this._id);
         }
     }
 
