@@ -4,7 +4,7 @@ require("should");
 var TestModel = require("./test-model");
 var validate = require("../src/base-model-validator");
 
-it("#01. should success when create new Model", function() {
+it("#01. should success when create new Model", function () {
     var model = new TestModel();
     validate(model);
 
@@ -15,7 +15,7 @@ it("#01. should success when create new Model", function() {
     model.copy.should.be.type("function");
 });
 
-it("#02. should only have property from defined model except for _id", function() {
+it("#02. should only have property from defined model except for _id", function () {
     var model = new TestModel({
         _id: {},
         forbidden: true
@@ -27,7 +27,7 @@ it("#02. should only have property from defined model except for _id", function(
     model._id.should.be.instanceof(Object);
 });
 
-it("#03. model values should equal source values", function() {
+it("#03. model values should equal source values", function () {
     var source = {
         number: 10,
         string: "some string",
@@ -47,7 +47,7 @@ it("#03. model values should equal source values", function() {
     }
 });
 
-it("#04. model createdDate should not changed when stamping", function() {
+it("#04. model createdDate should not changed when stamping", function () {
     var source = {
         number: 10,
         string: "some string",
